@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>article list </title>
+</head>
+<body>
+	<table>
+		  <thead>
+		    <tr>
+		      <th>id</th>
+		      <th>标题</th>
+		      <th>描述</th>
+		      <th>创建人</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="cmsArticle: ${cmsArticleList}">
+		      <td th:text="${cmsArticle.id}"></td>
+		      <td th:text="${cmsArticle.title}"></td>
+		      <td th:text="${cmsArticle.summary}"></td>
+		      <td th:text="${cmsArticle.createName}"></td>
+		    </tr>
+		  </tbody>
+	</table>
+</body>
+</html>
