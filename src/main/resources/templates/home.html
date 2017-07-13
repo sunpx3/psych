@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>country List</title>
+</head>
+<body>
+	<table>
+	  <thead>
+	    <tr>
+	      <th>id</th>
+	      <th>公司</th>
+	      <td>简称</td>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="country: ${countryList}">
+	      <td th:text="${country.id}"></td>
+	      <td th:text="${country.countryName}"></td>
+	      <td th:text="${country.countryCode}"></td>
+	    </tr>
+	  </tbody>
+	</table>
+</body>
+</html>
