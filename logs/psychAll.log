@@ -1,0 +1,109 @@
+2017-07-13 23:37:42,570  INFO Application:48 - Starting Application on sunpx-PC with PID 4736 (H:\spring-boot-list\psych\target\classes started by sunpx in H:\spring-boot-list\psych)
+2017-07-13 23:37:42,573  INFO Application:666 - No active profile set, falling back to default profiles: default
+2017-07-13 23:37:42,954  INFO Version:17 - HV000001: Hibernate Validator 5.2.2.Final
+2017-07-13 23:37:43,007  INFO AnnotationConfigEmbeddedWebApplicationContext:578 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@262b2c86: startup date [Thu Jul 13 23:37:43 CST 2017]; root of context hierarchy
+2017-07-13 23:37:44,156  INFO DefaultListableBeanFactory:839 - Overriding bean definition for bean 'beanNameViewResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2017-07-13 23:37:45,048  INFO PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$11de91cb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-13 23:37:45,922  INFO TomcatEmbeddedServletContainer:81 - Tomcat initialized with port(s): 8080 (http)
+2017-07-13 23:37:46,038  INFO StandardService:180 - Starting service Tomcat
+2017-07-13 23:37:46,073  INFO StandardEngine:180 - Starting Servlet Engine: Apache Tomcat/8.0.30
+2017-07-13 23:37:46,230  INFO [/]:180 - Initializing Spring embedded WebApplicationContext
+2017-07-13 23:37:46,231  INFO ContextLoader:272 - Root WebApplicationContext: initialization completed in 3230 ms
+2017-07-13 23:37:46,739  INFO ServletRegistrationBean:189 - Mapping servlet: 'dispatcherServlet' to [/]
+2017-07-13 23:37:46,745  INFO FilterRegistrationBean:258 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-07-13 23:37:46,746  INFO FilterRegistrationBean:258 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-07-13 23:37:46,747  INFO FilterRegistrationBean:258 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-07-13 23:37:46,747  INFO FilterRegistrationBean:258 - Mapping filter: 'requestContextFilter' to: [/*]
+2017-07-13 23:37:47,860  INFO LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-07-13 23:37:47,875  INFO LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-07-13 23:37:47,978  INFO Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2017-07-13 23:37:47,981  INFO Environment:239 - HHH000206: hibernate.properties not found
+2017-07-13 23:37:47,984  INFO Environment:346 - HHH000021: Bytecode provider name : javassist
+2017-07-13 23:37:48,314  INFO Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2017-07-13 23:37:48,541  INFO Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-07-13 23:37:48,655  INFO ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-07-13 23:37:49,800  INFO RequestMappingHandlerAdapter:532 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@262b2c86: startup date [Thu Jul 13 23:37:43 CST 2017]; root of context hierarchy
+2017-07-13 23:37:49,899  INFO RequestMappingHandlerMapping:527 - Mapped "{[/]}" onto public java.lang.String com.zg.psych.controller.HelloController.index(org.springframework.ui.ModelMap)
+2017-07-13 23:37:49,900  INFO RequestMappingHandlerMapping:527 - Mapped "{[/article]}" onto public java.lang.String com.zg.psych.controller.HelloController.article(org.springframework.ui.ModelMap)
+2017-07-13 23:37:49,901  INFO RequestMappingHandlerMapping:527 - Mapped "{[/home]}" onto public java.lang.String com.zg.psych.controller.HelloController.home(org.springframework.ui.ModelMap)
+2017-07-13 23:37:49,904  INFO RequestMappingHandlerMapping:527 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-07-13 23:37:49,905  INFO RequestMappingHandlerMapping:527 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-07-13 23:37:49,946  INFO SimpleUrlHandlerMapping:341 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-13 23:37:49,947  INFO SimpleUrlHandlerMapping:341 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-13 23:37:49,999  INFO SimpleUrlHandlerMapping:341 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-13 23:37:50,641  INFO AnnotationMBeanExporter:431 - Registering beans for JMX exposure on startup
+2017-07-13 23:37:50,683  INFO Http11NioProtocol:180 - Initializing ProtocolHandler ["http-nio-8080"]
+2017-07-13 23:37:50,692  INFO Http11NioProtocol:180 - Starting ProtocolHandler ["http-nio-8080"]
+2017-07-13 23:37:50,705  INFO NioSelectorPool:180 - Using a shared selector for servlet write/read
+2017-07-13 23:37:50,727  INFO TomcatEmbeddedServletContainer:162 - Tomcat started on port(s): 8080 (http)
+2017-07-13 23:37:50,732  INFO Application:57 - Started Application in 8.571 seconds (JVM running for 9.115)
+2017-07-13 23:40:06,025  INFO Application:48 - Starting Application on sunpx-PC with PID 6564 (H:\spring-boot-list\psych\target\classes started by sunpx in H:\spring-boot-list\psych)
+2017-07-13 23:40:06,028  INFO Application:666 - No active profile set, falling back to default profiles: default
+2017-07-13 23:40:06,402  INFO Version:17 - HV000001: Hibernate Validator 5.2.2.Final
+2017-07-13 23:40:06,452  INFO AnnotationConfigEmbeddedWebApplicationContext:578 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@262b2c86: startup date [Thu Jul 13 23:40:06 CST 2017]; root of context hierarchy
+2017-07-13 23:40:07,531  INFO DefaultListableBeanFactory:839 - Overriding bean definition for bean 'beanNameViewResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2017-07-13 23:40:08,320  INFO PostProcessorRegistrationDelegate$BeanPostProcessorChecker:328 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$11de91cb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-13 23:40:09,043  INFO TomcatEmbeddedServletContainer:81 - Tomcat initialized with port(s): 8080 (http)
+2017-07-13 23:40:09,064  INFO StandardService:180 - Starting service Tomcat
+2017-07-13 23:40:09,066  INFO StandardEngine:180 - Starting Servlet Engine: Apache Tomcat/8.0.30
+2017-07-13 23:40:09,219  INFO [/]:180 - Initializing Spring embedded WebApplicationContext
+2017-07-13 23:40:09,220  INFO ContextLoader:272 - Root WebApplicationContext: initialization completed in 2773 ms
+2017-07-13 23:40:09,637  INFO ServletRegistrationBean:189 - Mapping servlet: 'dispatcherServlet' to [/]
+2017-07-13 23:40:09,643  INFO FilterRegistrationBean:258 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-07-13 23:40:09,644  INFO FilterRegistrationBean:258 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-07-13 23:40:09,644  INFO FilterRegistrationBean:258 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-07-13 23:40:09,644  INFO FilterRegistrationBean:258 - Mapping filter: 'requestContextFilter' to: [/*]
+2017-07-13 23:40:10,542  INFO LocalContainerEntityManagerFactoryBean:339 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-07-13 23:40:10,555  INFO LogHelper:46 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-07-13 23:40:10,658  INFO Version:54 - HHH000412: Hibernate Core {4.3.11.Final}
+2017-07-13 23:40:10,660  INFO Environment:239 - HHH000206: hibernate.properties not found
+2017-07-13 23:40:10,662  INFO Environment:346 - HHH000021: Bytecode provider name : javassist
+2017-07-13 23:40:10,944  INFO Version:66 - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2017-07-13 23:40:11,129  INFO Dialect:145 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-07-13 23:40:11,250  INFO ASTQueryTranslatorFactory:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-07-13 23:40:12,335  INFO RequestMappingHandlerAdapter:532 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@262b2c86: startup date [Thu Jul 13 23:40:06 CST 2017]; root of context hierarchy
+2017-07-13 23:40:12,458  INFO RequestMappingHandlerMapping:527 - Mapped "{[/]}" onto public java.lang.String com.zg.psych.controller.HelloController.index(org.springframework.ui.ModelMap)
+2017-07-13 23:40:12,466  INFO RequestMappingHandlerMapping:527 - Mapped "{[/home]}" onto public java.lang.String com.zg.psych.controller.HelloController.home(org.springframework.ui.ModelMap)
+2017-07-13 23:40:12,466  INFO RequestMappingHandlerMapping:527 - Mapped "{[/article]}" onto public java.lang.String com.zg.psych.controller.HelloController.article(org.springframework.ui.ModelMap)
+2017-07-13 23:40:12,472  INFO RequestMappingHandlerMapping:527 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-07-13 23:40:12,473  INFO RequestMappingHandlerMapping:527 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-07-13 23:40:12,532  INFO SimpleUrlHandlerMapping:341 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-13 23:40:12,533  INFO SimpleUrlHandlerMapping:341 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-13 23:40:12,600  INFO SimpleUrlHandlerMapping:341 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-13 23:40:13,278  INFO AnnotationMBeanExporter:431 - Registering beans for JMX exposure on startup
+2017-07-13 23:40:13,335  INFO Http11NioProtocol:180 - Initializing ProtocolHandler ["http-nio-8080"]
+2017-07-13 23:40:13,349  INFO Http11NioProtocol:180 - Starting ProtocolHandler ["http-nio-8080"]
+2017-07-13 23:40:13,367  INFO NioSelectorPool:180 - Using a shared selector for servlet write/read
+2017-07-13 23:40:13,395  INFO TomcatEmbeddedServletContainer:162 - Tomcat started on port(s): 8080 (http)
+2017-07-13 23:40:13,405  INFO Application:57 - Started Application in 7.864 seconds (JVM running for 8.364)
+2017-07-13 23:40:19,580  INFO [/]:180 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-07-13 23:40:19,580  INFO DispatcherServlet:489 - FrameworkServlet 'dispatcherServlet': initialization started
+2017-07-13 23:40:19,603  INFO DispatcherServlet:508 - FrameworkServlet 'dispatcherServlet': initialization completed in 22 ms
+2017-07-13 23:40:19,809  INFO TemplateEngine:825 - [THYMELEAF] INITIALIZING TEMPLATE ENGINE
+2017-07-13 23:40:19,883  INFO AbstractTemplateResolver:99 - [THYMELEAF] INITIALIZING TEMPLATE RESOLVER: org.thymeleaf.templateresolver.TemplateResolver
+2017-07-13 23:40:19,883  INFO AbstractTemplateResolver:110 - [THYMELEAF] TEMPLATE RESOLVER INITIALIZED OK
+2017-07-13 23:40:19,884  INFO AbstractMessageResolver:72 - [THYMELEAF] INITIALIZING MESSAGE RESOLVER: org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+2017-07-13 23:40:19,884  INFO AbstractMessageResolver:78 - [THYMELEAF] MESSAGE RESOLVER INITIALIZED OK
+2017-07-13 23:40:19,890  INFO CONFIG:123 - [THYMELEAF] TEMPLATE ENGINE CONFIGURATION:
+[THYMELEAF] * Cache Factory implementation: org.thymeleaf.cache.StandardCacheManager
+[THYMELEAF] * Template modes:
+[THYMELEAF]     * VALIDXML
+[THYMELEAF]     * XML
+[THYMELEAF]     * XHTML
+[THYMELEAF]     * HTML5
+[THYMELEAF]     * LEGACYHTML5
+[THYMELEAF]     * VALIDXHTML
+[THYMELEAF] * Template resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.templateresolver.TemplateResolver
+[THYMELEAF] * Message resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+[THYMELEAF] * Dialect [1 of 2]: org.thymeleaf.spring4.dialect.SpringStandardDialect
+[THYMELEAF]     * Prefix: "th"
+[THYMELEAF] * Dialect [2 of 2]: nz.net.ultraq.thymeleaf.LayoutDialect
+[THYMELEAF]     * Prefix: "layout"
+[THYMELEAF] TEMPLATE ENGINE CONFIGURED OK
+2017-07-13 23:40:19,891  INFO TemplateEngine:838 - [THYMELEAF] TEMPLATE ENGINE INITIALIZED

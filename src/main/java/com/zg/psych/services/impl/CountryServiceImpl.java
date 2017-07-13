@@ -1,4 +1,4 @@
-package com.zg.psych.services;
+package com.zg.psych.services.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.entity.CountryEntity;
+import com.zg.psych.services.CountryService;
 
 /**
  * 多数据源配置，采用jdbctemplate方式。
