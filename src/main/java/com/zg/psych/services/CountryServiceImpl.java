@@ -13,21 +13,27 @@ import org.springframework.stereotype.Service;
 import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.entity.CountryEntity;
 
+/**
+ * 多数据源配置，采用jdbctemplate方式。
+ * @author sunpx
+ *
+ */
 @Service
 public class CountryServiceImpl implements CountryService {
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	@Qualifier("primaryJdbcTemplate")
+	private JdbcTemplate jdbcTemplate1;
 	
 	@Autowired
-	@Qualifier("primaryJdbcTemplate")
-	protected JdbcTemplate jdbcTemplate1;
+	@Qualifier("secondaryJdbcTemplate")
+	protected JdbcTemplate jdbcTemplate2;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CountryEntity> findAll() {
 		
-		return jdbcTemplate.query("SELECT * FROM COUNTRY WHERE 1=1",new RowMapper() {
+		return jdbcTemplate1.query("SELECT * FROM COUNTRY WHERE 1=1",new RowMapper() {
 
 			@Override
 			public Object mapRow(ResultSet rs, int paramInt) throws SQLException {
@@ -45,7 +51,7 @@ public class CountryServiceImpl implements CountryService {
 	public List<CmsArticleEntity> findAllCmsArticleList() {
 		
 		String sql = "SELECT * FROM cms_article WHERE 1=1";
-		return jdbcTemplate1.query(sql, new RowMapper(){
+		return jdbcTemplate2.query(sql, new RowMapper(){
 
 			@Override
 			public Object mapRow(ResultSet rs, int arg1) throws SQLException {
