@@ -1,10 +1,15 @@
 package com.zg.psych.services.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import com.zg.psych.datasource.TargetDataSource;
 import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.mapper.CmsArticleMapper;
 import com.zg.psych.services.CmsArticleService;
@@ -13,10 +18,29 @@ import com.zg.psych.services.CmsArticleService;
 public class CmsArticleServiceImpl implements CmsArticleService {
 
 	@Autowired
-	private CmsArticleMapper cmsArticleMapper;
+	private JdbcTemplate jdbcTemplate;
 	
+	
+	@TargetDataSource(name="ds1")
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<CmsArticleEntity> findAll() {
-		return cmsArticleMapper.findAll();
+	public List<CmsArticleEntity> findAllCmsArticleList() {
+		
+		String sql = "SELECT * FROM cms_article WHERE 1=1";
+		return jdbcTemplate.query(sql, new RowMapper(){
+
+			@Override
+			public Object mapRow(ResultSet rs, int arg1) throws SQLException {
+				
+				CmsArticleEntity cmsArticle = new CmsArticleEntity();
+				
+				cmsArticle.setId(rs.getString("id"));
+				cmsArticle.setTitle(rs.getString("title"));
+				cmsArticle.setSummary(rs.getString("summary"));
+				cmsArticle.setCreateName(rs.getString("create_name"));
+				
+				return cmsArticle;
+			}
+		});
 	}
 }

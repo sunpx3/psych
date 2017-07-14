@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Select;
 
 import com.zg.psych.entity.CmsArticleEntity;
 
-@Mapper
+//@Mapper
 public interface CmsArticleMapper {
-
+/*
 	@Select(value="SELECT * FROM cms_article where 1=1")
-	public List<CmsArticleEntity> findAll();
+	public List<CmsArticleEntity> findAll();*/
 }

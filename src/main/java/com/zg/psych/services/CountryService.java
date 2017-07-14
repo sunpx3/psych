@@ -6,8 +6,5 @@ import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.entity.CountryEntity;
 
 public interface CountryService {
-
 	public List<CountryEntity> findAll();
-	
-	public List<CmsArticleEntity> findAllCmsArticleList();
 }

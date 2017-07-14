@@ -19,8 +19,8 @@ public class HelloController {
 	
 	@Autowired
 	private CountryService countryService;
-	@Autowired
-	private CountryRepository countryRepository;
+	//@Autowired
+	//private CountryRepository countryRepository;
 	@Autowired
 	private CmsArticleService cmsArticleService;
 	
@@ -45,8 +45,8 @@ public class HelloController {
     @RequestMapping("/article")
     public String article(ModelMap map){
     	
-    	//List<CmsArticleEntity> cmsArticleList = countryService.findAllCmsArticleList();
-    	List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAll();
+    	List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAllCmsArticleList();
+    	//List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAll();
     	map.put("cmsArticleList", cmsArticleList);
     	return "article";
     }

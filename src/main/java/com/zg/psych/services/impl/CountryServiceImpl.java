@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import com.zg.psych.datasource.TargetDataSource;
 import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.entity.CountryEntity;
 import com.zg.psych.services.CountryService;
@@ -23,18 +24,17 @@ import com.zg.psych.services.CountryService;
 public class CountryServiceImpl implements CountryService {
 
 	@Autowired
-	@Qualifier("primaryJdbcTemplate")
-	private JdbcTemplate jdbcTemplate1;
+	private JdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	@Qualifier("secondaryJdbcTemplate")
-	protected JdbcTemplate jdbcTemplate2;
-
+	
+	/**
+	 * 不加@targetDataSource注解则为默认数据库
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CountryEntity> findAll() {
 		
-		return jdbcTemplate1.query("SELECT * FROM COUNTRY WHERE 1=1",new RowMapper() {
+		return jdbcTemplate.query("SELECT * FROM COUNTRY WHERE 1=1",new RowMapper() {
 
 			@Override
 			public Object mapRow(ResultSet rs, int paramInt) throws SQLException {
@@ -47,25 +47,4 @@ public class CountryServiceImpl implements CountryService {
 		});
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<CmsArticleEntity> findAllCmsArticleList() {
-		
-		String sql = "SELECT * FROM cms_article WHERE 1=1";
-		return jdbcTemplate2.query(sql, new RowMapper(){
-
-			@Override
-			public Object mapRow(ResultSet rs, int arg1) throws SQLException {
-				
-				CmsArticleEntity cmsArticle = new CmsArticleEntity();
-				
-				cmsArticle.setId(rs.getString("id"));
-				cmsArticle.setTitle(rs.getString("title"));
-				cmsArticle.setSummary(rs.getString("summary"));
-				cmsArticle.setCreateName(rs.getString("create_name"));
-				
-				return cmsArticle;
-			}
-		});
-	}
 }
