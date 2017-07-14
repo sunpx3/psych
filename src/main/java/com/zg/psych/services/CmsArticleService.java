@@ -16,4 +16,6 @@ public interface CmsArticleService {
 //	 */
 //	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	List<CmsArticleEntity> findAllCmsArticleList();
+	
+	List<CmsArticleEntity> findAllCmsArticleList1();
 }

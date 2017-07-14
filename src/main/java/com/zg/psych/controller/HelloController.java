@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.zg.psych.datasource.TargetDataSource;
 import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.entity.CountryEntity;
 import com.zg.psych.repository.CountryRepository;
@@ -17,6 +18,8 @@ import com.zg.psych.services.CountryService;
 @Controller
 public class HelloController {
 	
+	private Logger logger = Logger.getLogger(HelloController.class);
+	
 	@Autowired
 	private CountryService countryService;
 	//@Autowired
@@ -24,7 +27,7 @@ public class HelloController {
 	@Autowired
 	private CmsArticleService cmsArticleService;
 	
-	private Logger logger = Logger.getLogger(HelloController.class);
+	
 
     @RequestMapping("/")
     public String index(ModelMap map) {
@@ -42,11 +45,12 @@ public class HelloController {
     	return "home";
     }
     
+	@TargetDataSource(name="ds1")
     @RequestMapping("/article")
     public String article(ModelMap map){
     	
-    	List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAllCmsArticleList();
-    	//List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAll();
+    	//List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAllCmsArticleList();
+    	List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAllCmsArticleList1();
     	map.put("cmsArticleList", cmsArticleList);
     	return "article";
     }

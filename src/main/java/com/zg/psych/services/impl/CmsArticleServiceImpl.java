@@ -20,8 +20,10 @@ public class CmsArticleServiceImpl implements CmsArticleService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
+	private CmsArticleMapper mapper;
 	
-	@TargetDataSource(name="ds1")
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CmsArticleEntity> findAllCmsArticleList() {
@@ -42,5 +44,12 @@ public class CmsArticleServiceImpl implements CmsArticleService {
 				return cmsArticle;
 			}
 		});
+	}
+	
+	/**
+	 * @TargetDataSource注解不能直接在Mapper接口上使用.
+	 */
+	public List<CmsArticleEntity> findAllCmsArticleList1(){
+		return mapper.findAll();
 	}
 }
