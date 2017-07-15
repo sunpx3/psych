@@ -1,4 +1,4 @@
-package com.zg.psych.datasource;
+package com.zg.core.datasource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

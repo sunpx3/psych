@@ -1,4 +1,4 @@
-package com.zg.psych.datasource;
+package com.zg.core.datasource;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

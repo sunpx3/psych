@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.zg.psych.datasource.TargetDataSource;
+import com.zg.core.datasource.TargetDataSource;
 import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.entity.CountryEntity;
 import com.zg.psych.repository.CountryRepository;

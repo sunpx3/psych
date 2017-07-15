@@ -1,4 +1,4 @@
-package com.zg.psych.conf;
+package com.zg.core.conf;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;

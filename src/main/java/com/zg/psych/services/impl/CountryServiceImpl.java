@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import com.zg.psych.datasource.TargetDataSource;
+import com.zg.core.datasource.TargetDataSource;
 import com.zg.psych.entity.CmsArticleEntity;
 import com.zg.psych.entity.CountryEntity;
 import com.zg.psych.services.CountryService;
