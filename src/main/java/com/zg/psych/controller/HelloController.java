@@ -31,8 +31,7 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index(ModelMap map) {
-    	map.put("host", "124.0.0.1");
-        return "index";
+        return "admin/index";
     }
     
     @RequestMapping("/home")

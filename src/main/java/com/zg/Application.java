@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-import com.zg.psych.datasource.DynamicDataSourceRegister;
+import com.zg.core.datasource.DynamicDataSourceRegister;
 
 @SpringBootApplication
 @Import({DynamicDataSourceRegister.class}) // 动态注册多数据源
