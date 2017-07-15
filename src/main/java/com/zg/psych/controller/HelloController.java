@@ -41,7 +41,7 @@ public class HelloController {
     	//List<CountryEntity> countryList = countryRepository.findAll(); 
     	map.put("countryList", countryList);
     	logger.debug(countryList.size());
-    	return "home";
+    	return "demo/home";
     }
     
 	@TargetDataSource(name="ds1")
@@ -51,7 +51,7 @@ public class HelloController {
     	//List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAllCmsArticleList();
     	List<CmsArticleEntity> cmsArticleList = cmsArticleService.findAllCmsArticleList1();
     	map.put("cmsArticleList", cmsArticleList);
-    	return "article";
+    	return "demo/article";
     }
 
 }
