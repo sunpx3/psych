@@ -15,8 +15,7 @@ import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
 /**
- * 龙果教程-Spring Boot全集
- * 
+ * 修改对配置文件，直接运行main方法即可。
  * @author wujing
  */
 public class PsychGenerator {
