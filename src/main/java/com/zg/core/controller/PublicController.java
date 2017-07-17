@@ -27,5 +27,12 @@ public class PublicController {
 
 		return new ModelAndView("admin/index");
 	}
+	
+	
+	@RequestMapping("logout")
+	public ModelAndView toLogout(HttpServletRequest request, HttpServletResponse response){
+		
+		return new ModelAndView("admin/login");
+	}
 
 }
