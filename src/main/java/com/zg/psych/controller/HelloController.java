@@ -27,13 +27,6 @@ public class HelloController {
 	@Autowired
 	private CmsArticleService cmsArticleService;
 	
-	
-
-    @RequestMapping("/")
-    public String index(ModelMap map) {
-        return "admin/index";
-    }
-    
     @RequestMapping("/home")
     public String home(ModelMap map){
     	
