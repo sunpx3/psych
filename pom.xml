@@ -23,6 +23,7 @@
 		<java.version>1.8</java.version>
 		<jdk.version>1.8</jdk.version>
 		<log4j.version>1.2.17</log4j.version>
+		<shiro.version>1.3.2</shiro.version>
 	</properties>
 
 	<dependencies>
@@ -109,6 +110,13 @@
 			<groupId>com.roncoo</groupId>
 			<artifactId>roncoo-mybatis-generator</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+		
+		<!-- 添加shiro core jar -->
+		<dependency>
+		  <groupId>org.apache.shiro</groupId>
+		  <artifactId>shiro-core</artifactId>
+		  <version>${shiro.version}</version>
 		</dependency>
 
 	</dependencies>
