@@ -55,7 +55,11 @@
 		</javaClientGenerator>
 		
 		<!-- 生成全部的表 -->
-		<table tableName="%" />
+		<table tableName="psy_user" domainObjectName="PsyUserEntity" />
+		<table tableName="psy_role" domainObjectName="PsyRoleEntity"></table>
+		<table tableName="psy_menu" domainObjectName="PsyMenuEntity"></table>
+		<table tableName="psy_user_role" domainObjectName="PsyUserRoleEntity"></table>
+		<table tableName="psy_role_menu" domainObjectName="PsyRoleMenuEntity"></table>
 		
 	</context>
 </generatorConfiguration>
