@@ -3,7 +3,14 @@ package com.zg.core.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class PsyRoleMenuEntity implements Serializable {
+    @Id
+    @Column(name = "uid")
+    @GeneratedValue(generator = "UUID")
     private String uid;
 
     private String psyRoleUid;
