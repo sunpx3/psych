@@ -5,6 +5,7 @@ import com.zg.core.entity.PsyUserEntityExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.test.context.jdbc.Sql;
 
 @Mapper
 public interface PsyUserEntityMapper {
@@ -20,7 +21,7 @@ public interface PsyUserEntityMapper {
 
     List<PsyUserEntity> selectByExample(PsyUserEntityExample example);
 
-    PsyUserEntity selectByPrimaryKey(String uid);
+    PsyUserEntity selectByPrimaryKeyselectByPrimaryKey(String uid);
 
     int updateByExampleSelective(@Param("record") PsyUserEntity record, @Param("example") PsyUserEntityExample example);
 
@@ -29,4 +30,8 @@ public interface PsyUserEntityMapper {
     int updateByPrimaryKeySelective(PsyUserEntity record);
 
     int updateByPrimaryKey(PsyUserEntity record);
+    
+    //根据用户名查询
+    @Sql("select * from psy_user u where u.username = :username")
+    PsyUserEntity selectPsyUserByUserName(@Param("username") String username);
 }
