@@ -112,12 +112,44 @@
 			<version>1.0.0</version>
 		</dependency>
 		
+		<dependency>
+        	<groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-api</artifactId>
+	    </dependency>
+		
 		<!-- 添加shiro core jar -->
 		<dependency>
 		  <groupId>org.apache.shiro</groupId>
 		  <artifactId>shiro-core</artifactId>
 		  <version>${shiro.version}</version>
 		</dependency>
+		<dependency>  
+		    <groupId>org.apache.shiro</groupId>  
+		    <artifactId>shiro-web</artifactId>  
+		    <version>${shiro.version}</version>  
+		</dependency>  
+		<dependency>  
+		    <groupId>org.apache.shiro</groupId>  
+		    <artifactId>shiro-spring</artifactId>  
+		    <version>${shiro.version}</version>  
+		</dependency>  
+		<dependency>  
+		    <groupId>org.apache.shiro</groupId>  
+		    <artifactId>shiro-ehcache</artifactId>  
+		    <version>${shiro.version}</version>  
+		</dependency>  
+		
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-guice</artifactId>
+		    <version>${shiro.version}</version>  
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
 
 	</dependencies>
 
