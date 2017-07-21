@@ -21,7 +21,6 @@ import org.springframework.util.StringUtils;
 
 import com.zg.core.entity.PsyUserEntity;
 import com.zg.core.entity.PsyUserRoleEntity;
-import com.zg.core.entity.PsyUserRoleEntityExample;
 import com.zg.core.mapper.PsyUserEntityMapper;
 import com.zg.core.mapper.PsyUserRoleEntityMapper;
 

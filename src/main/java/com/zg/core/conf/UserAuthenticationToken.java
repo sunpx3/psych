@@ -51,4 +51,9 @@ public class UserAuthenticationToken implements AuthenticationToken, RememberMeA
 	public String getUsername() {
 		return username;
 	}
+
+	public void setRememberMe(boolean rememberMe) {
+		this.rememberMe = rememberMe;
+	}
+
 }
