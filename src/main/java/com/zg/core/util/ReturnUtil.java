@@ -9,7 +9,7 @@ import org.springframework.ui.ModelMap;
 
 /**
  * JSON统一返回数据格式
- * date 2016/11/23 0023 下午 14:53
+ * 2017年7月22日19:50:17
  */
 public class ReturnUtil {
 
