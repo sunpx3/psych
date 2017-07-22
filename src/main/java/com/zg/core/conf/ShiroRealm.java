@@ -3,6 +3,7 @@ package com.zg.core.conf;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -23,11 +24,14 @@ import com.zg.core.entity.PsyUserEntity;
 import com.zg.core.entity.PsyUserRoleEntity;
 import com.zg.core.mapper.PsyUserEntityMapper;
 import com.zg.core.mapper.PsyUserRoleEntityMapper;
+import com.zg.core.util.PasswordUtil;
 
 public class ShiroRealm extends AuthorizingRealm {
 	
+	private Logger logger = Logger.getLogger(ShiroRealm.class);
+	
 	public ShiroRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
-		super(cacheManager, matcher);
+		super(cacheManager, matcher); 
 	}
 
 	@Autowired
@@ -60,15 +64,20 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)  throws AuthenticationException {
 		UserAuthenticationToken token = (UserAuthenticationToken) authenticationToken;
 		if (StringUtils.isEmpty(token.getUsername())) {
-			throw new IncorrectCredentialsException("username is null!");
+			throw new IncorrectCredentialsException("用户名不能为空！");
 		} else if (StringUtils.isEmpty(token.getCredentials())) {
-			throw new IncorrectCredentialsException("password is null!");
+			throw new IncorrectCredentialsException("密码不能为空！");
 		}
 		PsyUserEntity user = psyUserEntityMapper.selectPsyUserByUserName(token.getUsername());
 		if (user == null) { // 用户不存在
-			throw new UnknownAccountException("The user does not exist");
+			throw new UnknownAccountException("该用户不存在!");
 		}
-		//String userPassword = userService.getUserPassword(user.getUid());
-		return new SimpleAuthenticationInfo(token.getUsername(), user.getPassword(), getName());
+		//得到加密后密文
+		//String userPassword = PasswordUtil.md5Password(token.getUsername(),token.getPassword(),user.getSalt());
+//		boolean isPwdStatus = PasswordUtil.checkMd5Password(token.getUsername(), token.getPassword(), user.getSalt(), user.getPassword());
+//		if(!isPwdStatus){
+//			throw new IncorrectCredentialsException("The password is error!");
+//		}
+		return new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), getName());
 	}
 }
