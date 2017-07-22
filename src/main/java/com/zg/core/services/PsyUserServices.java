@@ -10,4 +10,6 @@ import com.zg.core.entity.PsyUserEntity;
 public interface PsyUserServices {
 
 	PsyUserEntity registerUser(PsyUserEntity psyUser);
+	
+	public PsyUserEntity getUserByUserName(String username);
 }

@@ -51,4 +51,9 @@ public class PsyUserServiceImpl implements PsyUserServices{
 		
 		return psyUserNew;
 	}
+
+	@Override
+	public PsyUserEntity getUserByUserName(String username) {
+		return mapper.selectPsyUserByUserName(username);
+	}
 }

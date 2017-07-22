@@ -21,6 +21,7 @@ import com.mysql.jdbc.StringUtils;
 import com.zg.core.conf.UserAuthenticationToken;
 import com.zg.core.entity.PsyUserEntity;
 import com.zg.core.services.PsyUserServices;
+import com.zg.core.util.PasswordUtil;
 import com.zg.core.util.ReturnUtil;
 import com.zg.core.util.ViewUtil;
 
@@ -34,7 +35,7 @@ import com.zg.core.util.ViewUtil;
 public class PublicController {
 
 	private Logger logger = Logger.getLogger(PublicController.class);
-	
+
 	@Autowired
 	private PsyUserServices psyUserservices;
 
@@ -47,58 +48,58 @@ public class PublicController {
 	public ModelAndView checkUser(@Param("username") String username, @Param("password") String password) {
 
 		String resultMessage = "";
-		try {
-			if (!StringUtils.isNullOrEmpty(username) && !StringUtils.isNullOrEmpty(password)) {
-				UserAuthenticationToken token = new UserAuthenticationToken(username, password, true);
-				Subject currentPsyUser = SecurityUtils.getSubject();
-				token.setRememberMe(true);
-				currentPsyUser.login(token);// 验证角色和权限
-				if (currentPsyUser.isAuthenticated()) {
-					logger.info("登录成功....");
-					return ViewUtil.forwardUrl("admin/index");
-				} else {
-					resultMessage = "系统异常，请联系管理员!";
-					logger.error(resultMessage);
-					return ViewUtil.forwardUrl("admin/login", ReturnUtil.Error(resultMessage));
-				}
-			}
+		Subject currentPsyUser = SecurityUtils.getSubject();
+		UserAuthenticationToken token = new UserAuthenticationToken(username, "e3c31d77f14afdcdeb47d5d330664de2", true);
+		token.setRememberMe(true);
 
-		} catch (IncorrectCredentialsException e) {
-			resultMessage = e.getMessage();
+		try {
+			logger.debug("验证开始......");
+			currentPsyUser.login(token);// 验证角色和权限
+			logger.debug("验证通过......");
 		} catch (UnknownAccountException e) {
 			resultMessage = e.getMessage();
+			logger.error("验证失败.....未知用户" + e);
+		} catch (IncorrectCredentialsException e) {
+			resultMessage = e.getMessage();
+			logger.error("验证失败.....错误凭据" + e);
 		} catch (Exception e) {
-			resultMessage = "系统异常，请联系管理员!";
+			resultMessage = "登录异常，请联系管理员!";
 		}
-		logger.error(resultMessage);
-		return ViewUtil.forwardUrl("admin/login", ReturnUtil.Error(resultMessage));
+		// 验证是否登录成功
+		if (currentPsyUser.isAuthenticated()) {
+			logger.info("登录成功....正在进入系统..");
+			return ViewUtil.forwardUrl("admin/index");
+		} else {
+			logger.error(resultMessage);
+			return ViewUtil.forwardUrl("admin/login", ReturnUtil.Error(resultMessage));
+		}
 	}
 
 	/**
 	 * 用户注册
+	 * 
 	 * @param psyUser
 	 * @return
 	 */
 	@RequestMapping(value = "registerUser", method = RequestMethod.POST)
-	public ModelAndView registerUser(@Param("regUsername") String regUsername,
-			@Param("regPassword") String regPassword,
-			@Param("regEmail")    String regEmail) {
+	public ModelAndView registerUser(@Param("regUsername") String regUsername, @Param("regPassword") String regPassword, @Param("regEmail") String regEmail) {
 
 		try {
-			PsyUserEntity psyUser = new PsyUserEntity(regUsername, regPassword , regEmail);
+			PsyUserEntity psyUser = new PsyUserEntity(regUsername, regPassword, regEmail);
 			psyUserservices.registerUser(psyUser);
 			return ViewUtil.forwardUrl("admin/login");
-		}catch(IncorrectCredentialsException e){
+		} catch (IncorrectCredentialsException e) {
 			logger.error(e.getMessage());
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
+
 		return ViewUtil.redirectUrl("admin/login");
 	}
 
 	/**
 	 * 登出
+	 * 
 	 * @param request
 	 * @param response
 	 * @return

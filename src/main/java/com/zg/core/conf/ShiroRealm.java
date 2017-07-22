@@ -17,6 +17,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -27,16 +28,16 @@ import com.zg.core.mapper.PsyUserRoleEntityMapper;
 import com.zg.core.util.PasswordUtil;
 
 public class ShiroRealm extends AuthorizingRealm {
-	
+
 	private Logger logger = Logger.getLogger(ShiroRealm.class);
-	
+
 	public ShiroRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
-		super(cacheManager, matcher); 
+		super(cacheManager, matcher);
 	}
 
 	@Autowired
 	private PsyUserEntityMapper psyUserEntityMapper;
-	
+
 	@Autowired
 	private PsyUserRoleEntityMapper psyUserRoleEntityMapper;
 
@@ -53,15 +54,14 @@ public class ShiroRealm extends AuthorizingRealm {
 			}
 			authorizationInfo.addRoles(roleIds);
 
-			//TODO add permits
-			//authorizationInfo.addStringPermissions(null);
+			// TODO add permits
+			// authorizationInfo.addStringPermissions(null);
 
 		}
 		return authorizationInfo;
 	}
 
-	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)  throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 		UserAuthenticationToken token = (UserAuthenticationToken) authenticationToken;
 		if (StringUtils.isEmpty(token.getUsername())) {
 			throw new IncorrectCredentialsException("用户名不能为空！");
@@ -72,12 +72,22 @@ public class ShiroRealm extends AuthorizingRealm {
 		if (user == null) { // 用户不存在
 			throw new UnknownAccountException("该用户不存在!");
 		}
-		//得到加密后密文
-		//String userPassword = PasswordUtil.md5Password(token.getUsername(),token.getPassword(),user.getSalt());
-//		boolean isPwdStatus = PasswordUtil.checkMd5Password(token.getUsername(), token.getPassword(), user.getSalt(), user.getPassword());
-//		if(!isPwdStatus){
-//			throw new IncorrectCredentialsException("The password is error!");
-//		}
-		return new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), getName());
+		// 得到加密后密文
+		// String userPassword = PasswordUtil.md5Password(token.getUsername(),
+		// token.getPassword(), user.getSalt());
+		// boolean isPwdStatus =
+		// PasswordUtil.checkMd5Password(token.getUsername(),
+		// token.getPassword(), user.getSalt(), user.getPassword());
+		// if (!isPwdStatus) {
+		// throw new IncorrectCredentialsException("The password is error!");
+		// }
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+                user, //用户名
+                user.getPassword(), //密码
+                ByteSource.Util.bytes(user.getSalt()),
+                user.getUsername() //realm name
+        );
+
+		return authenticationInfo;
 	}
 }
