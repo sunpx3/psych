@@ -155,12 +155,15 @@ public class ShiroConfiguration {
 	public ShiroFilterFactoryBean getShiroFilterFactoryBean(){
 		ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 		factoryBean.setSecurityManager(getSecurityManager());
-		factoryBean.setLoginUrl("/login");
+		factoryBean.setLoginUrl("/console/login");
+		//factoryBean.setSuccessUrl("/console/index");
+		factoryBean.setUnauthorizedUrl("/console/login");
 		filterChainDefinitionMap.put("/dist/**", "anon");
 		filterChainDefinitionMap.put("/plugins/**", "anon");
-		filterChainDefinitionMap.put("/login**", "anon");
+        filterChainDefinitionMap.put("/console/**", "anon");
 		filterChainDefinitionMap.put("/register**", "anon");
 		filterChainDefinitionMap.put("/**", "user");
+		
 		factoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return factoryBean;
 	}

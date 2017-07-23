@@ -1,6 +1,6 @@
 $(function(){
 	
 	$( "#signout" ).on ( "click" , function() {
-		window.location.href = "/logout";
+		window.location.href = "/console/logout";
 	});
 });

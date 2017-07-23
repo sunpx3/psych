@@ -9,6 +9,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mysql.jdbc.StringUtils;
@@ -34,6 +37,7 @@ import com.zg.core.util.ViewUtil;
  *
  */
 @Controller
+@RequestMapping(value="/console")
 public class PublicController {
 
 	private Logger logger = Logger.getLogger(PublicController.class);
@@ -41,13 +45,14 @@ public class PublicController {
 	@Autowired
 	private PsyUserServices psyUserservices;
 
-	@RequestMapping("login")
-	public String index(ModelMap map) {
-		return "admin/login";
-	}
-
+    @RequestMapping(value="/login", method=RequestMethod.GET)
+    public String loginForm(){
+        return "admin/login";
+    }
+	
 	@RequestMapping(value = "loginCheckUser", method = RequestMethod.POST)
-	public ModelAndView checkUser(@Param("username") String username, @Param("password") String password) {
+	public ModelAndView checkUser(@Param("username") String username, @Param("password") String password,
+			RedirectAttributes redirectAttributes) {
 
 		String resultMessage = "";
 		Subject currentPsyUser = SecurityUtils.getSubject();
@@ -67,13 +72,18 @@ public class PublicController {
 		} catch (Exception e) {
 			resultMessage = "登录异常，请联系管理员!";
 		}
+		
 		// 验证是否登录成功
 		if (currentPsyUser.isAuthenticated()) {
 			logger.info("登录成功....正在进入系统..");
-			return ViewUtil.forwardUrl("admin/index");
+			Session session = SecurityUtils.getSubject().getSession();
+			//session.setAttribute("psyUserUUID", value);
+			return ViewUtil.redirectUrl("/console/index");
 		} else {
+			//重定向后带参传递。
+			redirectAttributes.addFlashAttribute("modelMap",ReturnUtil.Error(resultMessage));
 			logger.error(resultMessage);
-			return ViewUtil.forwardUrl("admin/login", ReturnUtil.Error(resultMessage));
+			return ViewUtil.redirectUrl("/console/login");
 		}
 
 		// return ReturnUtil.Success(resultMessage, "admin/index", "");
@@ -98,7 +108,7 @@ public class PublicController {
 			logger.error(e.getMessage());
 		}
 
-		return ViewUtil.redirectUrl("admin/login");
+		return ViewUtil.redirectUrl("/console/login");
 	}
 
 	/**
@@ -112,7 +122,14 @@ public class PublicController {
 	public ModelAndView toLogout(HttpServletRequest request, HttpServletResponse response) {
 		Subject currentPsyUser = SecurityUtils.getSubject();
 		currentPsyUser.logout();
-		return ViewUtil.forwardUrl("admin/login");
+		logger.info("已退出系统.....");
+		return ViewUtil.redirectUrl("/console/login");
+	}
+	
+	
+	@RequestMapping("/404")
+	public ModelAndView error(){
+		return ViewUtil.redirectUrl("/common/404");
 	}
 
 }
