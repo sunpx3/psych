@@ -15,8 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mysql.jdbc.StringUtils;
 import com.zg.core.conf.UserAuthenticationToken;
 import com.zg.core.entity.PsyUserEntity;
@@ -49,13 +51,13 @@ public class PublicController {
 
 		String resultMessage = "";
 		Subject currentPsyUser = SecurityUtils.getSubject();
-		UserAuthenticationToken token = new UserAuthenticationToken(username, "e3c31d77f14afdcdeb47d5d330664de2", true);
+		UserAuthenticationToken token = new UserAuthenticationToken(username, password, true);
 		token.setRememberMe(true);
 
 		try {
-			logger.debug("验证开始......");
+			logger.info("验证开始......");
 			currentPsyUser.login(token);// 验证角色和权限
-			logger.debug("验证通过......");
+			logger.info("验证通过......");
 		} catch (UnknownAccountException e) {
 			resultMessage = e.getMessage();
 			logger.error("验证失败.....未知用户" + e);
@@ -73,6 +75,8 @@ public class PublicController {
 			logger.error(resultMessage);
 			return ViewUtil.forwardUrl("admin/login", ReturnUtil.Error(resultMessage));
 		}
+
+		// return ReturnUtil.Success(resultMessage, "admin/index", "");
 	}
 
 	/**

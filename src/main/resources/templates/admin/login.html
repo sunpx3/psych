@@ -6,8 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<title>Admin</title>
   	<link rel="stylesheet" href="../../dist/css/login2.css">
-  <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
 	<!--[if IE]>
 		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
 	<![endif]-->
@@ -32,7 +31,7 @@
 	          </svg>
 	          <input type="password" class="login__input pass" name="password" placeholder="Password"/>
 	        </div>
-	        <button class="login__submit">登 录</button>
+	        <button class="login__submit" type="button" id="login_btn">登 录</button>
 	        <p class="login__signup">还没有账号? &nbsp;<a href="#" target="_blank">立刻注册</a></p>
 	      </form>
 	    </div>
@@ -79,12 +78,8 @@
 	    </div>
 	  </div>
 	</div>
-	
-	<script src="../../plugins/layui/layui.js"></script>
+	<div  th:include="common/meta"></div>
 	<script src='../../dist/js/pages/login2.js?t=1'></script>
-	<!-- jQuery 2.2.3 -->
-	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-
 	<script th:inline="javascript">
 	$(document).ready(function () {
 	    var animating = false, submitPhase1 = 1100, submitPhase2 = 1000, logoutPhase1 = 800, $login = $('.login'), $app = $('.app');
@@ -107,10 +102,27 @@
 	        });
 	        elem.append($ripple);
 	    };
-	    $('.login__form').on('submit', function (e) {
-	    	var that = $(".login__submit");
+	    function ajaxForm(url,postType,data,resultHandle) {
+	    	$.ajax({
+	    		url : url,
+	    		type: postType,
+	    		data: data,
+	    		success:function(data) {
+	    			resultHandle(data);
+	    		},error:function(){
+	    			layui.use('layer', function(){
+			    		  var layer = layui.layer;
+			    		  layer.msg("登录异常，请联系管理员.",{offset: 't'});  
+			    	}); 	
+	    		}
+	    	});
+	    }
+	    $('#login_btn').on('click', function (e) {
+	    	var that   	 = $(".login__form");
 	    	var username = $("input[name='username']").val();
 	    	var password = $("input[name='password']").val();
+	    	var url  	 = that.attr("action");
+	    	var postType = that.attr("method");
 	    	//验证非空
 	    	if( username == "" || username == undefined ) {
 	    		layui.use('layer', function(){
@@ -134,9 +146,14 @@
 	        setTimeout(function () {
 	        	animating = false;
 	            that.removeClass('processing');
-                //alert("登录成功")
-                //$("#login__form").submit();
-	            return true;
+                
+	            that.submit();
+	           /*  ajaxForm(url,postType,{"username":username,"password":password},function(data) {
+	            	var resJson = data;
+	            	if(resJson.status === 1) {
+	            		location.href = location.host +"/"+ resJson.result;
+	            	}
+	            }); */
 	        }, submitPhase1);
 	    });
 	    

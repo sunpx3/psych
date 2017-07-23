@@ -51,15 +51,22 @@ public class ShiroConfiguration {
 		scheduler.setInterval(900000);
 		return scheduler;
 	}
-
-	@Bean(name = "hashedCredentialsMatcher")
-	public HashedCredentialsMatcher getHashedCredentialsMatcher() {
-		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-		credentialsMatcher.setHashAlgorithmName("MD5");
-		credentialsMatcher.setHashIterations(1);
-		credentialsMatcher.setStoredCredentialsHexEncoded(true);
-		return credentialsMatcher;
+	//关闭自带密码校验，由自己实现 
+//	@Bean(name = "hashedCredentialsMatcher")
+//	public HashedCredentialsMatcher getHashedCredentialsMatcher() {
+//		HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+//		credentialsMatcher.setHashAlgorithmName("MD5");
+//		credentialsMatcher.setHashIterations(1);
+//		credentialsMatcher.setStoredCredentialsHexEncoded(true);
+//		return credentialsMatcher;
+//	}
+	//重写密码校验
+	@Bean(name = "psyCredentialsMatcher")
+	public PsyHashedCredentialsMatcherImpl getHashedCredentialsMatcher() {
+		PsyHashedCredentialsMatcherImpl psyCredentialsMatcher = new PsyHashedCredentialsMatcherImpl();
+		return psyCredentialsMatcher;
 	}
+	
 
 	@Bean(name = "sessionIdCookie")
 	public SimpleCookie getSessionIdCookie() {

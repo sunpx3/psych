@@ -33,9 +33,9 @@ public class PasswordUtil {
 		return psyUser;
 	}
 	
-	public static String md5Password(String username, String password , String salt) {
+	public static Object md5Password(String username, String password , String salt) {
 		// 组合username,两次迭代，对密码进行加密
-		String password_cipherText = new Md5Hash(password, username + salt, 2).toHex();
+		Object password_cipherText = new Md5Hash(password, username + salt, 2).toHex();
 		return password_cipherText;
 	}
 	
