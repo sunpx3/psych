@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.session.Session;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.alibaba.fastjson.JSONObject;
 import com.mysql.jdbc.StringUtils;
 import com.zg.core.conf.UserAuthenticationToken;
+import com.zg.core.conf.WebKeysUtils;
 import com.zg.core.entity.PsyUserEntity;
 import com.zg.core.services.PsyUserServices;
 import com.zg.core.util.PasswordUtil;
@@ -76,8 +78,9 @@ public class PublicController {
 		// 验证是否登录成功
 		if (currentPsyUser.isAuthenticated()) {
 			logger.info("登录成功....正在进入系统..");
+			//保存登录用户名到session
 			Session session = SecurityUtils.getSubject().getSession();
-			//session.setAttribute("psyUserUUID", value);
+			session.setAttribute(WebKeysUtils.LOGIN_USER_NAME, token.getUsername());
 			return ViewUtil.redirectUrl("/console/index");
 		} else {
 			//重定向后带参传递。

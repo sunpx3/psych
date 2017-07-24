@@ -1,5 +1,7 @@
 package com.zg.core.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/index")
+	@RequiresRoles("admin")
 	public String index(@ModelAttribute("modelMap") ModelMap modelMap) {
 		return "admin/index";
 	}

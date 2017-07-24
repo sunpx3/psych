@@ -41,23 +41,30 @@ public class ShiroRealm extends AuthorizingRealm {
 	@Autowired
 	private PsyUserRoleEntityMapper psyUserRoleEntityMapper;
 
+	/*
+	 * 当没有使用缓存的时候，不断刷新页面的话，这个代码会不断执行， 当其实没有必要每次都重新设置权限信息，所以我们需要放到缓存中进行管理；
+	 * 当放到缓存中时，这样的话，doGetAuthorizationInfo就只会执行一次了， 缓存过期之后会再次执行。
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection paramPrincipalCollection) {
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		PsyUserEntity psyUserEntity = (PsyUserEntity) SecurityUtils.getSubject().getSession().getAttribute(WebKeysUtils.LOGIN_USER);
-		if (psyUserEntity != null) {
-			// 当前用户角色编码集合
-			List<String> roleIds = new ArrayList<>();
+		String psyUserName = (String) SecurityUtils.getSubject().getSession().getAttribute(WebKeysUtils.LOGIN_USER_NAME);
+		if (!"".equals(psyUserName)) {
+			PsyUserEntity psyUserEntity = psyUserEntityMapper.selectPsyUserByUserName(psyUserName);
+			if (psyUserEntity != null) {
+				// 当前用户角色编码集合
+				List<String> roleIds = new ArrayList<>();
+				List<PsyUserRoleEntity> roleList = psyUserRoleEntityMapper.selectPsyUserRoleListByUserId(psyUserEntity.getUid());
+				for (PsyUserRoleEntity roleUser : roleList) {
+					roleIds.add(String.valueOf(roleUser.getPsyRoleUid()));
+				}
+				authorizationInfo.addRoles(roleIds);
 
-			for (PsyUserRoleEntity role : psyUserRoleEntityMapper.selectPsyUserRoleListByUserId(psyUserEntity)) {
-				roleIds.add(String.valueOf(role.getUid()));
+				// TODO add permits
+				// authorizationInfo.addStringPermissions(null);
 			}
-			authorizationInfo.addRoles(roleIds);
-
-			// TODO add permits
-			// authorizationInfo.addStringPermissions(null);
-
 		}
+
 		return authorizationInfo;
 	}
 
@@ -81,12 +88,11 @@ public class ShiroRealm extends AuthorizingRealm {
 		// if (!isPwdStatus) {
 		// throw new IncorrectCredentialsException("The password is error!");
 		// }
-		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user, //用户名
-                user.getPassword(), //密码
-                ByteSource.Util.bytes(user.getSalt()),
-                user.getUsername() //realm name
-        );
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, // 用户名
+				user.getPassword(), // 密码
+				ByteSource.Util.bytes(user.getSalt()), user.getUsername() // realm
+																			// name
+		);
 
 		return authenticationInfo;
 	}

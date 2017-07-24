@@ -160,9 +160,10 @@ public class ShiroConfiguration {
 		factoryBean.setUnauthorizedUrl("/console/login");
 		filterChainDefinitionMap.put("/dist/**", "anon");
 		filterChainDefinitionMap.put("/plugins/**", "anon");
-        filterChainDefinitionMap.put("/console/**", "anon");
+        filterChainDefinitionMap.put("/**/login", "anon");
+        filterChainDefinitionMap.put("/**/loginCheckUser", "anon");
 		filterChainDefinitionMap.put("/register**", "anon");
-		filterChainDefinitionMap.put("/**", "user");
+		//filterChainDefinitionMap.put("/**", "user");
 		
 		factoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return factoryBean;
