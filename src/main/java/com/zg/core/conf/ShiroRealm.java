@@ -60,6 +60,7 @@ public class ShiroRealm extends AuthorizingRealm {
 				}
 				authorizationInfo.addRoles(roleIds);
 
+				//getPermissions(info)
 				// TODO add permits
 				// authorizationInfo.addStringPermissions(null);
 			}
