@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文件上传</title>
+<style type="text/css">
+	.btns{
+		width:80%;
+	}
+	.btns #picker{
+	
+	}
+	.btns #ctlBtn{
+		
+	}
+	.btns #file-list-info{
+		border-right:1px solid #eee;
+		padding:0px 0px 0px 20px;
+	} 
+	.btns #progressLayout{
+		margin-top:47px;
+	}
+</style>
+</head>
+<body>
+		<div id="uploader" class="wu-example">
+			<!--用来存放文件信息-->
+			<div id="thelist" class="uploader-list">
+				<div class="btns">
+					<div class="col-sm-5">
+						<div class="col-sm-7">
+							<div id="picker" class="webuploader-container">选择文件</div>
+						</div>
+						<div class="col-sm-1">
+							<button id="ctlBtn" class="btn btn-default webuploader-pick">开始上传</button>
+						</div>
+						<hr/>
+						<div id="file-list-info"></div>
+					</div>
+					<div class="col-sm-7" id="progressLayout">
+						<!-- 文件上传进度 -->
+						<div id="Progress">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+<div  th:include="common/meta"></div>
+<link rel="stylesheet" href="plugins/webuploader/webuploader.css" />
+<script type="text/javascript" src="plugins/webuploader/webuploader.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+
+		
+		var uploader = WebUploader.create({
+
+		    // swf文件路径
+		    swf: 'plugins/Uploader.swf',
+
+		    // 文件接收服务端。
+		    server: '../fileupload.do?uploadFiles',
+
+		    // 选择文件的按钮。可选。
+		    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+		    pick: '#picker',
+
+		    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+		    resize: false,
+		    auto:false
+		});
+		//文件列表
+		uploader.on( 'fileQueued', function( file ) {
+		    $("#file-list-info").append( '<div id="' + file.id + '" class="item">' +
+		        '<h4 class="info">' + file.name + '</h4>' +
+		        '<p class="state">等待上传...</p>' +
+		    '</div>' );
+		});
+		
+		// 文件上传过程中创建进度条实时显示。
+		uploader.on( 'uploadProgress', function( file, percentage ) {
+		    var li = $("#Progress"), percent = li.find('.progress .progress-bar');
+
+		    // 避免重复创建
+		    if ( !percent.length ) {
+		    	percent = $('<div class="progress progress-striped active">' +
+		          '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+		          '</div>' +
+		        '</div>').appendTo( li ).find('.progress-bar');
+		    }
+		    $('p.state').text('上传中....');
+		    percent.css( 'width', percentage * 100 + '%' );
+		});
+		
+		//文件成功失败处理
+		uploader.on( 'uploadSuccess', function( file ) {
+		    $('p.state').text('已上传');
+		});
+
+		uploader.on( 'uploadError', function( file ) {
+		    $('p.state').text('上传出错');
+		});
+
+		uploader.on( 'uploadComplete', function( file ) {
+		    $('.progress').fadeOut();
+		});
+		
+		$("#ctlBtn").on('click',function(){
+			uploader.upload();
+		});
+	});
+</script>
+</html>

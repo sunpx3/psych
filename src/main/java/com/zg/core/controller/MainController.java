@@ -25,4 +25,9 @@ public class MainController {
 	public String index(@ModelAttribute("modelMap") ModelMap modelMap) {
 		return "admin/index";
 	}
+	
+	@RequestMapping("/main")
+	public String main(){
+		return "admin/main";
+	}
 }
