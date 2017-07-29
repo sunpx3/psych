@@ -6,6 +6,7 @@
 <style type="text/css">
 	.btns{
 		width:80%;
+		margin:20px;
 	}
 	.btns #picker{
 	
@@ -27,20 +28,22 @@
 			<!--用来存放文件信息-->
 			<div id="thelist" class="uploader-list">
 				<div class="btns">
-					<div class="col-sm-5">
-						<div class="col-sm-7">
-							<div id="picker" class="webuploader-container">选择文件</div>
+					<div class="col-sm-6">
+						<div class="col-sm-5">
+							<div id="picker" class="">选择文件</div>
 						</div>
-						<div class="col-sm-1">
+						<div class="col-sm-3">
+							<button class="btn btn-default webuploader-pick">图片上传</button>
+						</div>
+						<div class="col-sm-2">
 							<button id="ctlBtn" class="btn btn-default webuploader-pick">开始上传</button>
 						</div>
 						<hr/>
 						<div id="file-list-info"></div>
 					</div>
-					<div class="col-sm-7" id="progressLayout">
-						<!-- 文件上传进度 -->
-						<div id="Progress">
-						</div>
+					<!-- 文件上传进度 -->
+					<div class="col-sm-6" id="progressLayout">
+						
 					</div>
 				</div>
 			</div>
@@ -67,6 +70,24 @@
 
 		    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
 		    resize: false,
+		    
+		    // 设定单个文件大小，默认为10M
+		    fileSingleSizeLimit:1024,
+		    
+		    // 是否开启重复上传,默认为undefined，则不开启
+		    duplicate :false,
+		    
+		    //是否开起同时选择多个文件能力。
+		    //multiple:true,
+		    
+			// 允许上传的文件格式(详细可查doc目录下accept.txt)
+	        accept: {
+	            title: 'Images',
+	            extensions: 'jpg,png,doc,mp4',
+	            mimeTypes: 'image/*,application/msword,video/mp4'
+	        },
+		    
+		    //是否自动上传
 		    auto:false
 		});
 		//文件列表
@@ -79,7 +100,7 @@
 		
 		// 文件上传过程中创建进度条实时显示。
 		uploader.on( 'uploadProgress', function( file, percentage ) {
-		    var li = $("#Progress"), percent = li.find('.progress .progress-bar');
+		    var li = $("#progressLayout"), percent = li.find('.progress .progress-bar');
 
 		    // 避免重复创建
 		    if ( !percent.length ) {
